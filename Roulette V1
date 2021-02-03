@@ -1,0 +1,31 @@
+import discord
+import os
+import random
+
+client = discord.Client()
+
+
+@client.event
+async def on_ready():
+    print('We have logged in as {0.user}'.format(client))
+
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+
+    if message.content.startswith('$greetings'):
+      
+        await message.channel.send('Hello there!')
+
+
+    if message.content.startswith('$test'):
+      TestNumber = random.randrange(7)
+      if TestNumber == 6:
+        await message.channel.send('BANG')
+
+      else:
+        await message.channel.send('*The trigger clicks* Youre alive!')
+
+
+client.run(os.getenv('TOKEN'))
